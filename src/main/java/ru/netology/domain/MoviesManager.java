@@ -1,19 +1,23 @@
 package ru.netology.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import ru.netology.repository.Movie;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 
 public class MoviesManager {
 
     int limit = 10;
 
+    public MoviesManager() {
+    }
+
+    public MoviesManager(int limit) {
+        this.limit = limit;
+    }
+
     private Movie[] movies = new Movie[0];
+
+    public Movie[] getMovies() {
+        return movies;
+    }
 
     public void add(Movie item) {
         int length = movies.length + 1;
@@ -26,14 +30,14 @@ public class MoviesManager {
         movies = tmp;
     }
 
-    public Movie[] getMovies() {
+    public Movie[] getLastMovies() {
         int resultLength = limit;
         if (movies.length < limit) {
             resultLength = movies.length;
         }
         Movie[] result = new Movie[resultLength];
         int index = 0;
-        for (int i = movies.length - 1; i >= 0; i--) {
+        for (int i = movies.length - 1; index < resultLength; i--) {
             result[index] = movies[i];
             index++;
         }
